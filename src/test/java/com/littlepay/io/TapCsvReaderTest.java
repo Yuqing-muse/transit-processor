@@ -16,8 +16,10 @@ class TapCsvReaderTest {
 
     @Test
     void shouldParseValidRow() throws Exception {
-        String csv = "ID, DateTimeUTC, TapType, StopId, CompanyId, BusID, PAN\n" +
-                "1, 22-01-2023 13:00:00, ON, Stop1, Company1, Bus37, 5454545454545454\n";
+        String csv = """
+                ID, DateTimeUTC, TapType, StopId, CompanyId, BusID, PAN
+                1, 22-01-2023 13:00:00, ON, Stop1, Company1, Bus37, 5454545454545454
+                """;
 
         List<TapEvent> taps = reader.read(new StringReader(csv));
 
@@ -34,8 +36,10 @@ class TapCsvReaderTest {
 
     @Test
     void shouldTrimWhitespaceFromAllFields() throws Exception {
-        String csv = "ID, DateTimeUTC, TapType, StopId, CompanyId, BusID, PAN\n" +
-                " 2 ,  22-01-2023 13:05:00 ,  OFF ,  Stop2 ,  Company1 ,  Bus37 ,  4444333322221111 \n";
+        String csv = """
+                ID, DateTimeUTC, TapType, StopId, CompanyId, BusID, PAN
+                 2 ,  22-01-2023 13:05:00 ,  OFF ,  Stop2 ,  Company1 ,  Bus37 ,  4444333322221111\s
+                """;
 
         List<TapEvent> taps = reader.read(new StringReader(csv));
 
@@ -48,9 +52,11 @@ class TapCsvReaderTest {
 
     @Test
     void shouldSkipHeaderRow() throws Exception {
-        String csv = "ID, DateTimeUTC, TapType, StopId, CompanyId, BusID, PAN\n" +
-                "1, 22-01-2023 13:00:00, ON, Stop1, Company1, Bus37, 5454545454545454\n" +
-                "2, 22-01-2023 13:05:00, OFF, Stop2, Company1, Bus37, 5454545454545454\n";
+        String csv = """
+                ID, DateTimeUTC, TapType, StopId, CompanyId, BusID, PAN
+                1, 22-01-2023 13:00:00, ON, Stop1, Company1, Bus37, 5454545454545454
+                2, 22-01-2023 13:05:00, OFF, Stop2, Company1, Bus37, 5454545454545454
+                """;
 
         List<TapEvent> taps = reader.read(new StringReader(csv));
 

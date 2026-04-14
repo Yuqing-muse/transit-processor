@@ -1,9 +1,9 @@
 package com.littlepay.io;
 
 import com.littlepay.model.Trip;
-import com.littlepay.model.TripStatus;
 import com.opencsv.CSVWriter;
 
+import java.math.RoundingMode;
 import java.io.IOException;
 import java.io.Writer;
 import java.time.format.DateTimeFormatter;
@@ -38,7 +38,7 @@ public class TripCsvWriter {
                 String.valueOf(trip.durationSecs()),
                 trip.fromStopId(),
                 trip.toStopId() != null ? trip.toStopId() : "",
-                "$" + trip.chargeAmount().setScale(2),
+                "$" + trip.chargeAmount().setScale(2, RoundingMode.UNNECESSARY),
                 trip.companyId(),
                 trip.busId(),
                 trip.pan(),

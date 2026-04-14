@@ -1,0 +1,5 @@
+# Gradle wrapper - Windows batch file must retain CRLF
+gradlew.bat text eol=crlf
+
+# Unix shell scripts must use LF
+gradlew text eol=lf

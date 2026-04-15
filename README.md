@@ -26,6 +26,23 @@ A Java application that processes transit tap events (ON/OFF) from a CSV file an
 - Java 17+
 - Gradle (or use the included `./gradlew` wrapper)
 
+## Project Structure
+
+```
+src/
+  main/java/com/littlepay/
+    model/         : TapEvent, TapType, Trip, TripStatus, FareRule
+    service/       : FareCalculator, TripProcessor (business logic)
+    io/            : TapCsvReader, TripCsvWriter (I/O)
+    Main.java      : entry point
+  main/resources/
+    tap-events.csv : example input file
+  test/java/com/littlepay/
+    service/       : FareCalculatorTest, TripProcessorTest
+    io/            : TapCsvReaderTest, TripCsvWriterTest
+    TransitProcessorIntegrationTest.java
+```
+
 ## How to Build
 
 ```bash
@@ -77,29 +94,12 @@ Started,Finished,DurationSecs,FromStopId,ToStopId,ChargeAmount,CompanyId,BusID,P
 
 ## Error Handling
 
-The program exits with code 1 and prints a message to stderr for the following failures:
+The program exits with code 1 and prints a message for the following failures:
 
-| Condition | Message |
-|---|---|
-| Input file not found | `Error: input file not found: <path>` |
-| I/O or CSV parse failure | `Error: <detail>` |
-| Unknown stop pair in fare table | `Error: illegal argument: <detail>` |
+| Condition                  | Message |
+|----------------------------|---|
+| Input file not found       | `Error: input file not found: <path>` |
+| I/O or CSV parse failure   | `Error: <detail>` |
+| Unknown data in fare table | `Error: illegal argument: <detail>` |
 
-Malformed CSV rows are not validated (assumption 7).
-
-## Project Structure
-
-```
-src/
-  main/java/com/littlepay/
-    model/         : TapEvent, TapType, Trip, TripStatus, FareRule
-    service/       : FareCalculator, TripProcessor (business logic)
-    io/            : TapCsvReader, TripCsvWriter (I/O)
-    Main.java      : entry point
-  main/resources/
-    tap-events.csv : example input file
-  test/java/com/littlepay/
-    service/       : FareCalculatorTest, TripProcessorTest
-    io/            : TapCsvReaderTest, TripCsvWriterTest
-    TransitProcessorIntegrationTest.java
-```
+Malformed CSV rows are not validated (assumption).

@@ -31,7 +31,7 @@ configurations.all {
 dependencies {
     implementation("com.opencsv:opencsv:5.9")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
-    // CVE-2026-24400 affects isXmlEqualTo() only — not used in this project
+    // CVE-2026-24400 affects isXmlEqualTo() only - not used in this project
     testImplementation("org.assertj:assertj-core:3.27.3")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

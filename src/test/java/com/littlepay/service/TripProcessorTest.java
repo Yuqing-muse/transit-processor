@@ -92,9 +92,9 @@ class TripProcessorTest {
 
         assertThat(trips).hasSize(2);
 
-        Trip incompletedTrip = trips.stream().filter(t -> t.status() == TripStatus.INCOMPLETE).findFirst().orElseThrow();
-        assertThat(incompletedTrip.fromStopId()).isEqualTo("Stop1");
-        assertThat(incompletedTrip.chargeAmount()).isEqualByComparingTo(new BigDecimal("7.30"));
+        Trip incompleteTrip = trips.stream().filter(t -> t.status() == TripStatus.INCOMPLETE).findFirst().orElseThrow();
+        assertThat(incompleteTrip.fromStopId()).isEqualTo("Stop1");
+        assertThat(incompleteTrip.chargeAmount()).isEqualByComparingTo(new BigDecimal("7.30"));
 
         Trip completedTrip = trips.stream().filter(t -> t.status() == TripStatus.COMPLETED).findFirst().orElseThrow();
         assertThat(completedTrip.fromStopId()).isEqualTo("Stop2");

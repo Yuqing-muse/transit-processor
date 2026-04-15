@@ -22,15 +22,14 @@ public class TripProcessor {
     }
 
     public List<Trip> process(List<TapEvent> tapEvents) {
-        List<TapEvent> sortedTapEvent = tapEvents.stream()
+        List<TapEvent> sortedTapEvents = tapEvents.stream()
                 .sorted(Comparator.comparing(TapEvent::dateTimeUTC))
                 .toList();
 
-        // key = PAN + "|" + BusID
         Map<String, TapEvent> unpairedOnEvents = new HashMap<>();
         List<Trip> trips = new ArrayList<>();
 
-        for (TapEvent tap : sortedTapEvent) {
+        for (TapEvent tap : sortedTapEvents) {
             String key = tap.pan() + "|" + tap.busId();
 
             if (tap.tapType() == TapType.ON) {

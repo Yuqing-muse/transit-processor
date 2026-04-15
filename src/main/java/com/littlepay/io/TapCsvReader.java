@@ -28,17 +28,13 @@ public class TapCsvReader {
 
     private TapEvent toTapEvent(String[] row) {
         return new TapEvent(
-                Integer.parseInt(trim(row[0])),
-                LocalDateTime.parse(trim(row[1]), FORMATTER),
-                TapType.valueOf(trim(row[2])),
-                trim(row[3]),
-                trim(row[4]),
-                trim(row[5]),
-                trim(row[6])
+                Integer.parseInt(row[0].trim()),
+                LocalDateTime.parse(row[1].trim(), FORMATTER),
+                TapType.valueOf(row[2].trim()),
+                row[3].trim(),
+                row[4].trim(),
+                row[5].trim(),
+                row[6].trim()
         );
-    }
-
-    private String trim(String value) {
-        return value.trim();
     }
 }
